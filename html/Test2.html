@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]> <html class="lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]> <html class="lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>SafeWalk</title>
+
+    <link rel="stylesheet" href="../css/StatusStyle.css">
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src=".../js/StatusJS.js"></script>
+       <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script type='text/javascript' src='https://cdn.firebase.com/js/client/1.0.6/firebase.js'></script>
+
+</head>
+<body>
+
+    //<div id="topheading">SafeWalk</div>
+
+
+    <script>
+        // Get a reference to the root of the chat data.
+        var messageRef = new Firebase('https://safewalk.firebaseio.com/');
+    </script>
+
+    <div id="StatusBlock">
+        <h1 id='messagesDiv'>Status: </h1>
+
+        <div id='InnerStatusBlock'>Status:</div>
+
+        <script>
+            messageRef.on('value', function(snapshot) {
+                var Status = snapshot.child('Status').val();
+                $('#InnerStatusBlock').html(Status);
+
+
+                   if(Status=='Available'){
+                       $('#InnerStatusBlock').css("background-color","green");
+                   } else if(Status=='Busy'){
+                       $('#InnerStatusBlock').css("background-color","orange");
+                       //$('#InnerScreen').html(Status);
+
+                   } else {
+                       $('#InnerStatusBlock').css("background-color","red");
+                       //$('#InnerScreen').html(Status);
+
+                   }
+            });
+
+        </script>
+
+    </div>
+
+    <!--http://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_html_text_set-->
+
+
+    <div id="buttonsSection">
+
+        <h1>Click Availability </h1>
+            <a class="submit" id="Available" onclick="messageRef.child('Status').set('Available')"><span>Available</span></a>
+            <a class="submit" id="Busy" onclick="messageRef.child('Status').set('Busy')"><span>Busy</span></a>
+            <a class="submit" id="NotAvailable" onclick="messageRef.child('Status').set('Not Available')"><span>Not Available</span></a>
+   </div>
+
+    //represents how the data will be inputted into firebase from the android phone apps
+    <input style="display:block" type='text' id='nameInput' placeholder='Name'>
+    <input style="display:inline-block"type='text' id='messageInput' placeholder='Message...'>
+
+    <p id="NotificationScreen" style="overflow: scroll; ">Requests: </p>
+    <script>
+
+        // Get a reference to the root of the chat data.
+        var Notifications = new Firebase('https://safewalk.firebaseio.com/Notifications');
+
+        // When the user presses enter on the message input, write the message to firebase.
+        $('#messageInput').keypress(function (e) {
+            if (e.keyCode == 13) {
+                var name = $('#nameInput').val();
+                var text = $('#messageInput').val();
+                Notifications.push({name:name, text:text});
+                $('#messageInput').val('');
+            }
+        });
+
+        // Add a callback that is triggered for each chat message.
+       Notifications.limit(10).on('child_added', function (snapshot) {
+            var message = snapshot.val();
+
+           // $('<p/>').text(message.text+'\t'+message.name).prepend($('<em/>').appendTo('#NotificationScreen'));
+           $('#NotificationScreen').append("<p class=\"request\">" + message.text + '<br/>'+ message.name + "</p>");
+                 //  .text(message.name+': ')).appendTo($('#NotificationScreen'));
+
+           // $('<div/>').text(message.text).prepend($('<em/>')
+            // .text(message.name+': ')).appendTo($('#NotificationScreen'));
+          //  $('#NotificationScreen')[0].scrollTop = $('#Not')[0].scrollHeight;
+        });
+
+        $(document).on("dblclick", "#NotificationScreen > .request", function() {
+
+
+
+            // Request Complete Message
+            $(this).remove();
+        });
+
+    </script>
+
+
+    <div  class="col-md-6">
+        <!--Delete Todo button-->
+        <a class="btn btn-danger" ng-click="removeItem($index, item, $event)">
+            <i class="icon-remove-sign"></i>Delete
+        </a>
+
+        <a class="btn btn-warning" ng-click="changeStatus(item)">
+            <i class="icon-remove-sign"></i>Change Status
+        </a>
+    </div>
+
+
+    </div>
+
+
+</body>
+</html>
+
+
+        <!--Ticker reference:http://jsfiddle.net/saadshahd/3smGz/-->
+<!--Link to JQuery library online from google APIs. Have already downloading the library>
+"http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"
+        -->

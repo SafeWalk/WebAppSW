@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptLibraryMappings">
+    <file url="file://$PROJECT_DIR$/html/LoginPage.html" libraries="{firebase, firebase-simple-login, jquery}" />
+    <file url="file://$PROJECT_DIR$/html/StatusPage.html" libraries="{firebase, jquery}" />
+  </component>
+</project>
+
