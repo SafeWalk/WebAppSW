@@ -1,13 +1,42 @@
+#map-canvas{
+    float:right;
+    display: inline-block;
+    width: 550px;
+    height: 500px;
+
+}
+#NotificationScreen{
+    height: 497px;
+    width: 285px;
+    border: 2px solid black;
+    border-radius: 5px;
+    float:right;
+    display:block;
+    border-style:solid;
+    border-color:#bbb #888 #666 #aaa;
+    background:#206978;
+    color: white;
+    line-height:2;
+    text-align:left;
+    text-decoration:none;
+    font-weight:900;
+    display: inline-block;
+    font-size: 17px;
+}
 .request{
     display:block;
     border-style:solid;
     border-color:#bbb #888 #666 #aaa;
     border-width:3px 4px 4px 3px;
-    background:#ccc;
+    background:#97C1B6;
     line-height:2;
     text-align:center;
     text-decoration:none;
     font-weight:900;
+    font-size: 12px;
+    font-family: 'Quicksand', sans-serif;
+    color: black;
+
 }
 .request > a{
     color:green;
@@ -17,18 +46,23 @@
     display: inline-block;
     vertical-align: middle;
 }
+.request > .inline-message {
+    display: inline-block;
+    vertical-align: middle;
+}
 .request > .message {
-    width: 320px;
+    width: 180px;
 }
 #topheading {
     font-size: 50px;
     line-height: 80px;
     font-weight: bold;
-    color: darkblue;
+    color: white;
+    font-family: 'Quicksand', sans-serif;
     text-align: center;
     margin: 30px;
     height: 80px;
-    background-color: #F38630;
+
     margin-bottom: 10px;
 }
 
@@ -39,54 +73,64 @@ h1{
 body {
     font: 13px/20px 'Lucida Grande', Tahoma, Verdana, sans-serif;
     color: #404040;
-    background: #0ca3d2;
+    background: linear-gradient(270deg, #336899, #234290);;
 }
 
 #buttonsSection{
-    height: 300px;
-    width: 400px;
+    height: 180px;
+    width: 350px;
     border: 2px solid black;
     border-radius: 5px;
-    float:left;
-    margin: 10px;
+    margin-top: 50px;
+    position:absolute;
+    font-family: 'Quicksand', sans-serif;
+    color: white;
     }
 
 #StatusBlock{
-    height: 300px;
-    width: 500px;
+    height: 220px;
+    width: 350px;
     border: 2px solid black;
     border-radius: 5px;
-    margin: auto;
+    float:left;
+    position:absolute;
+
     /*Add your CSS here!*/
+}
+
+#StatusBlock > h1 {
+    color:white;
+    font-family: 'Quicksand', sans-serif;
 }
 
 #InnerStatusBlock{
     height: 90px;
-    width: 350px;
+    width: 250px;
     border: 2px solid black;
     border-radius: 5px;
     margin: auto;
-    margin-top: 70px;
-    background-color: lightgray;
+    margin-top: 40px;
+    background-color: white;
     line-height: 90px;
     text-align: center;
-    text-decoration-color: black;
+    text-decoration-color: white;
     font-size: 35px;
+    font-family: 'Quicksand', sans-serif;
+    color: white;
 }
 
-.submit {
-    -moz-border-radius: 100px;
-    -webkit-border-radius: 100px;
-    padding: 5px;
-    position: relative;
-    display: inline-block;
-    height: 100px;
-    width: 100px;
-    border-radius: 100%;
-    margin-left:8px;
-    text-align: center;
-    line-height: 100px;
 
+.submit {
+    padding: 4px;
+    display: inline-block;
+    height: 75px;
+    width: 90px;
+    border-radius: 100%;
+    text-align: center;
+    line-height: 75px;
+    margin-left:5px;
+    color: white;
+    font-family: 'Quicksand', sans-serif;
 
 }
 
@@ -94,23 +138,26 @@ body {
     background-color: forestgreen;
     border: 5px solid #009900;
     text-align: center;
+    margin-left: 5px;
 }
 
 #Busy{
     background-color: orange;
     border: 5px solid darkorange;
 
+
 }
 
 #NotAvailable{
     background-color: red;
     border: 5px solid darkred;
+    margin-left: 5px;
 
 }
 
-A:link {color: blue; text-decoration:none}
-A:visited {color: blue; text-decoration:none}
-A:hover {text-decoration: none; opacity: 0.6; }
+.submit:link {color: blue; text-decoration:none}
+.submit:visited {color: blue; text-decoration:none}
+.submit:hover {text-decoration: none; opacity: 0.6; }
 
 img{
     width:100px;
@@ -119,26 +166,5 @@ img{
 }
 
 
-span{
-    margin: auto;
-    margin-top: 20px;
 
-}
 
-#NotificationScreen{
-    height: 300px;
-    width: 400px;
-    border: 2px solid black;
-    border-radius: 5px;
-    float:right;
-    margin: 10px;
-    display:block;
-    border-style:solid;
-    border-color:#bbb #888 #666 #aaa;
-    background:#ccc;
-    color:#333;
-    line-height:2;
-    text-align:left;
-    text-decoration:none;
-    font-weight:900;
-}
