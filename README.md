@@ -2,26 +2,25 @@ SafeWalk Webpage
 ============
 This module of the SafeWalk project allows the administration of Macalester SafeWalk services to remotely manage the request placed through the SafeWalk android application (see SafeWalk module of this project).
 
-##Firebase
-<b>What is Firebase?</b><br>
-<b>How does it work?</b><br>
-<b>How did we implement it?</b><br>
-## Login Form — CSS Code Snippet
+The web interface utilizes two main outside dependencies. The first is Firebase, a real-time backend, which is used as the main avenue of communication with android application, pinpoint user location, hold login information for client. It acts as an external server and requires no serve-side code. The second, google play services is used to create the map and markers, to identify location of user who place requests. 
 
-## Browser Compatibility
+##Getting Started with Firebase
+<b>How does the web app interact with Firebase?</b><br>
+Using a Firebase reference as starting point for the location of a particular data, the web app uses javascript commands such as set,remove, update to manipulate data on firebase. These commands update realtime, allow the user app and web app to both detect changes. 
 
-Firefox 4+, Safari 4+, Chrome 13+, Opera 10+, Internet Explorer 7+.
+<b>What does it require?</b><br>
+Utilizing firebase primarily requires the use of a javascrip library they provide and jquery library.
 
-## Credits
+<b>How is it implemented?</b><br>
+They are both implement and linked using a script source in the head tag on the web page.
 
-Coded by [Thibaut Courouble](http://thibaut.me).
+<b>Limitations</b><br>
+The current of Firebase is developer mode. Which allows a maximum of 50 Max Connections, 5 GB Data Transfer, 100 MB Data Storage. If the app were to be published, scaled further a fee would be charged for firbase. 
 
-Original PSD by [Orman Clark](http://www.premiumpixels.com/freebies/clean-simple-login-form-psd/).
 
+## Getting Started with Google play services
+<b>How is it implemented?</b><br>
+The google play services is implemented using a script source in the head tag on the the web page.
 
-## License
-
-Copyright (c) 2012-2013 Thibaut Courouble
-
-Licensed under the MIT License
-
+<b>What does it require?</b><br> 
+It requires a google api library. Commands used to make the map and markers use function defined in the api. 
