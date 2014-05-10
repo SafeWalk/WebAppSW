@@ -53,6 +53,15 @@
 .request > .message {
     width: 180px;
 }
+
+.request-done{
+    color:red;
+    font-size: 18px;
+    font-weight: bold;
+    border: 1px solid black;
+
+}
+
 #topheading {
     font-size: 50px;
     line-height: 80px;
@@ -62,7 +71,6 @@
     text-align: center;
     margin: 30px;
     height: 80px;
-
     margin-bottom: 10px;
 }
 
