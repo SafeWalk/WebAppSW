@@ -3,8 +3,9 @@ SafeWalk Webpage
 This module of the SafeWalk project allows the administration of Macalester SafeWalk services to remotely manage the request placed through the SafeWalk android application (see SafeWalk module of this project).
 
 ##Firebase
-
-
+<b>What is Firebase?</b><br>
+<b>How does it work?</b><br>
+<b>How did we implement it?</b><br>
 ## Login Form — CSS Code Snippet
 
 ## Browser Compatibility
