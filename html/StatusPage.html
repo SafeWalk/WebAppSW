@@ -2,134 +2,188 @@
 <!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
 <!--[if IE 7]> <html class="lt-ie9 lt-ie8" lang="en"> <![endif]-->
 <!--[if IE 8]> <html class="lt-ie9" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" xmlns="http://www.w3.org/1999/html"> <!--<![endif]-->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>SafeWalk</title>
 
     <link rel="stylesheet" href="../css/StatusStyle.css">
-    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src=".../js/StatusJS.js"></script>
-       <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-    <script type='text/javascript' src='https://cdn.firebase.com/js/client/1.0.6/firebase.js'></script>
+    <link rel="shortcut icon" href="../images/iconhd.png">
 
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <script type='text/javascript' src='https://cdn.firebase.com/js/client/1.0.6/firebase.js'></script>
+    <script src="http://code.angularjs.org/1.2.6/angular.min.js"></script>
+    <script src="https://cdn.firebase.com/v0/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/0.5.0/angularfire.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script>
+        var map;
+        var Latlng = new google.maps.LatLng(44.9392,-93.1680);
+        var marker;
+        function initialize() {
+            var mapOptions = {
+                zoom: 14,
+                center: Latlng
+            };
+            map = new google.maps.Map(document.getElementById('map-canvas'),
+                    mapOptions);
+
+            var Boundary;
+            // Define the LatLng coordinates for the polygon's path.
+            var BoundCoords = [
+                new google.maps.LatLng(44.948368,-93.187344),
+                new google.maps.LatLng(44.948536,-93.146746),
+                new google.maps.LatLng(44.926921,-93.146607),
+                new google.maps.LatLng(44.927088,-93.187408),
+                new google.maps.LatLng(44.948368,-93.187344)
+            ];
+
+            // Construct the polygon.
+            Boundary = new google.maps.Polygon({
+                paths: BoundCoords,
+                strokeColor: '33FF99',
+                strokeOpacity: 0.4,
+                strokeWeight: 2,
+                fillColor: '33FF99',
+                fillOpacity: 0.35
+            });
+
+            Boundary.setMap(map);
+
+
+        }
+
+        google.maps.event.addDomListener(window, 'load', initialize)
+    </script>
 </head>
 <body>
 
-    //<div id="topheading">SafeWalk</div>
+<div id="topheading">SafeWalk</div>
 
+<div id="StatusBlock">
+    <h1 id='messagesDiv'>Status: </h1>
+
+    <div id='InnerStatusBlock'>Status:</div>
 
     <script>
         // Get a reference to the root of the chat data.
         var messageRef = new Firebase('https://safewalk.firebaseio.com/');
+        messageRef.on('value', function(snapshot) {
+            var Status = snapshot.child('Status').val();
+            $('#InnerStatusBlock').html(Status);
+            if(Status=='Available'){
+                $('#InnerStatusBlock').css("background-color","green");
+            } else if(Status=='Busy'){
+                $('#InnerStatusBlock').css("background-color","orange");
+                           } else {
+                $('#InnerStatusBlock').css("background-color","red");
+            }
+        });
+
     </script>
-
-    <div id="StatusBlock">
-        <h1 id='messagesDiv'>Status: </h1>
-
-        <div id='InnerStatusBlock'>Status:</div>
-
-        <script>
-            messageRef.on('value', function(snapshot) {
-                var Status = snapshot.child('Status').val();
-                $('#InnerStatusBlock').html(Status);
-
-
-                   if(Status=='Available'){
-                       $('#InnerStatusBlock').css("background-color","green");
-                   } else if(Status=='Busy'){
-                       $('#InnerStatusBlock').css("background-color","orange");
-                       //$('#InnerScreen').html(Status);
-
-                   } else {
-                       $('#InnerStatusBlock').css("background-color","red");
-                       //$('#InnerScreen').html(Status);
-
-                   }
-            });
-
-        </script>
-
-    </div>
-
-    <!--http://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_html_text_set-->
 
 
     <div id="buttonsSection">
 
         <h1>Click Availability </h1>
-            <a class="submit" id="Available" onclick="messageRef.child('Status').set('Available')"><span>Available</span></a>
-            <a class="submit" id="Busy" onclick="messageRef.child('Status').set('Busy')"><span>Busy</span></a>
-            <a class="submit" id="NotAvailable" onclick="messageRef.child('Status').set('Not Available')"><span>Not Available</span></a>
-   </div>
+        <div class="submit" id="Available" onclick="messageRef.child('Status').set('Available')">Available</div>
+        <div class="submit" id="Busy" onclick="messageRef.child('Status').set('Busy')"><span>Busy</span></div>
+        <div class="submit" id="NotAvailable" onclick="messageRef.child('Status').set('Not Available')">Not Available</div>
 
-    //represents how the data will be inputted into firebase from the android phone apps
-    <input style="display:block" type='text' id='nameInput' placeholder='Name'>
-    <input style="display:inline-block"type='text' id='messageInput' placeholder='Message...'>
 
-    <p id="NotificationScreen" style="overflow: scroll; ">Requests: </p>
-    <script>
+    </div>
 
-        // Get a reference to the root of the chat data.
-        var Notifications = new Firebase('https://safewalk.firebaseio.com/Notifications');
+</div>
 
-        // When the user presses enter on the message input, write the message to firebase.
-        $('#messageInput').keypress(function (e) {
-            if (e.keyCode == 13) {
-                var name = $('#nameInput').val();
-                var text = $('#messageInput').val();
-                Notifications.push({name:name, text:text});
-                $('#messageInput').val('');
-            }
+<div class='RequestMap'>
+    <div id='map-canvas'></div>
+
+
+    <!--http://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_html_text_set-->
+    <div id="NotificationScreen" style="overflow: scroll; ">Requests: </div>
+</div>
+<!--http://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_html_text_set-->
+
+
+
+<script>
+
+    // Get a reference to the root of the chat data.
+    var Notifications = new Firebase('https://safewalk.firebaseio.com/Notifications');
+
+    // When the user presses enter on the message input, write the message to firebase.
+    $('#messageInput').keypress(function (e) {
+        if (e.keyCode == 13) {
+            var Name = $('#nameInput').val();
+            var Number= $('#Number').val();
+            var Location = $('#messageInput').val();
+            // Notifications.push({name:name, text:text, phone:phone});
+            Notifications.push({Name:Name, Location:Location, Number:Number});
+            $('#messageInput').val('');
+        }
+    });
+    var markers = {};
+    // Add a callback that is triggered for each chat message.
+    Notifications.limit(10).on('child_added', function (snapshot) {
+        var message = snapshot.val();
+        console.log(message)
+
+        $('#NotificationScreen').append("<div class=\"request\" data-request-id='" + snapshot.name() + "'>" +
+                "<div class='inline-block message'>" +
+                "<div>" + message.Name+' ; '+ message.Number+ "</div>" +
+                "<div class=\"coordinates\">" +message.Location+ "</div>" +
+                "</div>" +
+                " <div class='inline-block'>" +
+                " <a class='request-done'><i class='icon-remove-sign' style='margin:auto'>"
+                + "</i>Done</a>" +
+                "</div>" +
+                "</div>");
+
+
+        var Lat = parseFloat(message.Latitude);
+        var Lng = parseFloat(message.Longitude);
+
+        var latLng = new google.maps.LatLng(Lat,Lng);
+
+        var marker = new google.maps.Marker({
+            position: latLng,
+            map: self.map,
+            title: 'Hello World!'
         });
+        markers[snapshot.name()] = marker;
+        //   console.log(snapshot.name());
+        //   marker.set("id",snapshot.name());
+        //  console.log(marker);
 
-        // Add a callback that is triggered for each chat message.
-       Notifications.limit(10).on('child_added', function (snapshot) {
-            var message = snapshot.val();
+        google.maps.event.addDomListener(window, 'load', initialize);
 
-           // $('<p/>').text(message.text+'\t'+message.name).prepend($('<em/>').appendTo('#NotificationScreen'));
-           $('#NotificationScreen').append("<p class=\"request\">" + message.text + '<br/>'+ message.name + "</p>");
-                 //  .text(message.name+': ')).appendTo($('#NotificationScreen'));
+    });
 
-           // $('<div/>').text(message.text).prepend($('<em/>')
-            // .text(message.name+': ')).appendTo($('#NotificationScreen'));
-          //  $('#NotificationScreen')[0].scrollTop = $('#Not')[0].scrollHeight;
-        });
+    function RemoveMarker(id){
 
-        Notifications.limit(10).on('child_added', function (snapshot) {
-            var message = snapshot.val();
+        marker = markers[id];
+        marker.setMap(null);
 
-            // $('<p/>').text(message.text+'\t'+message.name).prepend($('<em/>').appendTo('#NotificationScreen'));
-            $('#NotificationScreen').append("<div class=\"request\" data-request-id='" + snapshot.name() + "'>" +
-                    "<div class='inline-block message'>" +
-                    "<div>" + message.text + "</div>" +
-                    "<div>" +message.name + "</div>" +
-                    "</div>" +
-                    " <div class='inline-block'>" +
-                    " <a class='request-done'><i class='icon-remove-sign' style='margin:auto'>"
-                    + "</i>Done</a>" +
-                    "</div>" +
-                    "</div>");
-        });
+    }
 
+    $(document).on("click", "#NotificationScreen .request-done", function() {
+        var request = $(this).parent().parent();
+        var url = new Firebase('https://safewalk.firebaseio.com/Notifications/' + request.data("request-id"));
+        url.remove();
+        request.remove();
 
-        $(document).on("click", "#NotificationScreen .request-done", function() {
-            var request = $(this).parent().parent();
-            var url = new Firebase('https://safewalk.firebaseio.com/Notifications/' + request.data("request-id"));
-            url.remove();
-            request.remove();
-        });
+        //  marker = markers[request.data("request-id")];
+        //   marker.setMap(null);
 
-    </script>
+        RemoveMarker(request.data("request-id"));
 
+    });
+
+</script>
 
 
 </body>
 </html>
-
-
-        <!--Ticker reference:http://jsfiddle.net/saadshahd/3smGz/-->
-<!--Link to JQuery library online from google APIs. Have already downloading the library>
-"http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"
-        -->
