@@ -1,5 +1,6 @@
-SafeWalk is a mobile app that allows Macalester College students to contact Safewalk services with only the touch of a button. A web interface has been implemented for this project to allow SafeWalk employees to set the availability of their services and  to manage the incoming requests.
+<b>SafeWalk is a mobile app that allows Macalester College students to contact Safewalk services with only the touch of a button.<b> <br>A web interface has been implemented for this project to allow SafeWalk employees to set the availability of their services and  to manage the incoming requests.
 
+<b>How do SafeWalk employees access the web interface?<b><br>
 Only prior authorized users are allowed access to the webpage through a login system. Once logged in, the webpage displays three interactive interfaces
 
 1. The admin user can change the availability of their services to three different status: "AVAILABLE", "BUSY", "NOT AVAILABLE". Three interactive buttons, which interacts with an external server (Firebase), allows real-time update of the status on all android SafeWalk app.
