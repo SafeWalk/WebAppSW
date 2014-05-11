@@ -1,3 +1,6 @@
+Client Documentation
+====================
+
 <b>SafeWalk is a mobile app that allows Macalester College students to contact Safewalk services with only the touch of a button.</b> <br>
 A web interface has been implemented for this project to allow SafeWalk employees to set the availability of their services and  to manage the incoming requests.
 
