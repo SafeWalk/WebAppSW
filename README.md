@@ -14,7 +14,7 @@ Utilizing Firebase primarily requires the use of a javascrip library they provid
 <b>How is it implemented?</b><br>
 They are both implemented and linked using a script source in the head tag on the html page.
 
-<b>How to access Firebase directly?<b><br>
+<b>How to access Firebase directly?</b><br>
 To manage how the data is structured, accessing Firebase would be important.This can be done by visiting the Firbease website directly. Any changes to the data can be made directly on Firebase and would update to both the web app and user app. Many of the finer details of working with Firebase is provided in their developer docs.  
 
 <b>Limitations</b><br>
