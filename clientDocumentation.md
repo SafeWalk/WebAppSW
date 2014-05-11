@@ -14,4 +14,4 @@ The admin user can change the availability of their services to three different 
 Incoming requests by SafeWalk App users are received as notifications, which are displayed in a subwindow of the webpage titled "Requests." The window presents the admin user with a list of the requests, each with the following informations: name, phone number, and the location of the user waiting to be picked up. A request can be removed from the list by clicking on the red "X"; this also removes its associated marker.
 
 <b>How is the geographic location of users determined?</b><br>
-A third window allows the admin user to view the location of users who submit a request. The position is displayed using the Google Map interactive interface. The admin can see the name of the user placing the request by clicking marker designating their position.
+A third window allows the admin user to view the location of users who submit a request. Each users position is displayed using a marker on a google map. The markers are interactive, clicking on them would show the users at a specific location.
